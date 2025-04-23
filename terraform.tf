@@ -8,8 +8,24 @@
 # These will be declared in the terraform document which consumes the module.
 
 terraform {
-  required_version = ">1.2.0"
+  required_version = ">1.9.0"
   required_providers {
-    # Add your required providers here.
+    tailscale = {
+      source = "tailscale/tailscale"
+      version = "0.19.0"
+    }
+
+    cloudflare = {
+      source = "cloudflare/cloudflare"
+      version = "~> 5"
+    }
+    local = {
+        source = "hashicorp/local"
+        version = "~> 2"
+    }
+    null = {
+      source = "hashicorp/null"
+      version = "~> 3.2.1"
+    }
   }
 }
