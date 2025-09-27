@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: 'actions/checkout@v5'
+        uses: "actions/checkout@v5"
         with:
           fetch-depth: 0
       - name: Get Consul
@@ -27,7 +27,7 @@ jobs:
         run: ./consul agent -server -dev &
       - name: Get Terraform
         run: |
-          curl -fSL https://releases.hashicorp.com/terraform/1.2.3/terraform_1.2.3_linux_amd64.zip \
+          curl -fSL https://releases.hashicorp.com/terraform/1.9.0/terraform_1.2.3_linux_amd64.zip \
           | gunzip -> terraform ; chmod u+x terraform
       - name: Init terraform
         run: ./terraform -chdir=examples/${{ matrix.example }} init
@@ -46,7 +46,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
       - name: Install dependencies
         run: |
           npm install -D '@semantic-release/commit-analyzer' \
