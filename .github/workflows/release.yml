@@ -16,23 +16,26 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: 'actions/checkout@v5'
+        uses: "actions/checkout@v5"
         with:
           fetch-depth: 0
+      - uses: jdx/mise-action@v2
+        with:
+          version: 2024.10.0
+          install: true
+          experimental: true
+          log_level: debug
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Get Consul
         run: |
           curl -fSL https://releases.hashicorp.com/consul/1.12.3/consul_1.12.3_linux_amd64.zip \
           | gunzip -> consul ; chmod u+x consul
       - name: Start Consul dev server
         run: ./consul agent -server -dev &
-      - name: Get Terraform
-        run: |
-          curl -fSL https://releases.hashicorp.com/terraform/1.2.3/terraform_1.2.3_linux_amd64.zip \
-          | gunzip -> terraform ; chmod u+x terraform
       - name: Init terraform
-        run: ./terraform -chdir=examples/${{ matrix.example }} init
+        run: terraform -chdir=examples/${{ matrix.example }} init
       - name: Validate terraform
-        run: ./terraform -chdir=examples/${{ matrix.example }} validate
+        run: terraform -chdir=examples/${{ matrix.example }} validate
   release:
     needs:
       - validate
@@ -46,7 +49,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
       - name: Install dependencies
         run: |
           npm install -D '@semantic-release/commit-analyzer' \
