@@ -28,7 +28,7 @@ jobs:
       - name: Get Terraform
         run: |
           curl -fSL https://releases.hashicorp.com/terraform/1.9.0/terraform_1.9.0_linux_amd64.zip > terraform.zip
-          gunzip terraform.zip
+          unzip terraform.zip
           chmod u+x terraform
       - name: Init terraform
         run: ./terraform -chdir=examples/${{ matrix.example }} init
