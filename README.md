@@ -53,11 +53,20 @@ examples themselves
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >1.2.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.9.0 |
+| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | ~> 5 |
+| <a name="requirement_local"></a> [local](#requirement\_local) | ~> 2 |
+| <a name="requirement_null"></a> [null](#requirement\_null) | ~> 3.2.1 |
+| <a name="requirement_tailscale"></a> [tailscale](#requirement\_tailscale) | 0.22.0 |
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_local"></a> [local](#provider\_local) | ~> 2 |
+| <a name="provider_null"></a> [null](#provider\_null) | ~> 3.2.1 |
+| <a name="provider_tailscale"></a> [tailscale](#provider\_tailscale) | 0.22.0 |
+| <a name="provider_vault"></a> [vault](#provider\_vault) | n/a |
 
 ## Modules
 
@@ -65,13 +74,22 @@ No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [local_file.wrangler](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
+| [null_resource.worker](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [tailscale_webhook.receiver](https://registry.terraform.io/providers/tailscale/tailscale/0.22.0/docs/resources/webhook) | resource |
+| [tailscale_devices.hah](https://registry.terraform.io/providers/tailscale/tailscale/0.22.0/docs/data-sources/devices) | data source |
+| [vault_kv_secret_v2.cloudflare](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/data-sources/kv_secret_v2) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_dummy"></a> [dummy](#input\_dummy) | dummy variable | `string` | n/a | yes |
+| <a name="input_devices"></a> [devices](#input\_devices) | A map of devices and their tags | `map(list(string))` | <pre>{<br/>  "wallpi": [<br/>    "pizero"<br/>  ]<br/>}</pre> | no |
+| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name for the webhook | `string` | n/a | yes |
+| <a name="input_worker_name"></a> [worker\_name](#input\_worker\_name) | n/a | `string` | `"tailscale-event-receiver"` | no |
+| <a name="input_zone"></a> [zone](#input\_zone) | The zone for the domain name | `string` | n/a | yes |
 
 ## Outputs
 
