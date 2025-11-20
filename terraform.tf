@@ -8,7 +8,7 @@
 # These will be declared in the terraform document which consumes the module.
 
 terraform {
-  required_version = "~> 1.13.0"
+  required_version = "~> 1.14.0"
   required_providers {
     tailscale = {
       source = "tailscale/tailscale"
